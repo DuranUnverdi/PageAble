@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = {"com.duranunverdi"})
 public class PageableApplicationStarter {
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(PageableApplicationStarter.class, args);
 	}
