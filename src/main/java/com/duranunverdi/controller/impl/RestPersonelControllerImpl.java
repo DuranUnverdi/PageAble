@@ -6,16 +6,14 @@ import com.duranunverdi.model.Personel;
 import com.duranunverdi.service.IPersonelService;
 import com.duranunverdi.utils.RestPageableRequest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/personel")
-public class RestPersonelControllerImpl {
+public class RestPersonelControllerImpl extends RestBaseController implements IRestPersonelController {
 
     private final IPersonelService service;
 
@@ -25,7 +23,7 @@ public class RestPersonelControllerImpl {
 
     @GetMapping("/list/pageable")
     public Page<DtoPersonel> findAll(RestPageableRequest restPageableRequest) {
-        Pageable pageable= PageRequest.of(restPageableRequest.getPageNumber(),restPageableRequest.getPageSize(),Sort.by(Sort.Direction.DESC,"id"));
+        Pageable pageable= toPageable(restPageableRequest);
         return service.findAll(pageable);
     }
 
