@@ -2,11 +2,10 @@ package com.duranunverdi.controller.impl;
 
 import com.duranunverdi.controller.IRestPersonelController;
 import com.duranunverdi.dto.DtoPersonel;
-import com.duranunverdi.model.Personel;
 import com.duranunverdi.service.IPersonelService;
+import com.duranunverdi.utils.RestPageableEntity;
 import com.duranunverdi.utils.RestPageableRequest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +21,10 @@ public class RestPersonelControllerImpl extends RestBaseController implements IR
     }
 
     @GetMapping("/list/pageable")
-    public Page<DtoPersonel> findAll(RestPageableRequest restPageableRequest) {
-        Pageable pageable= toPageable(restPageableRequest);
-        return service.findAll(pageable);
+    public RestPageableEntity<DtoPersonel> findAll(RestPageableRequest restPageableRequest) {
+        Page<DtoPersonel> page= service.findAll(toPageable(restPageableRequest));
+       RestPageableEntity<DtoPersonel> pageable= toPageableResponse(page,page.getContent());
+        return pageable;
     }
 
 }

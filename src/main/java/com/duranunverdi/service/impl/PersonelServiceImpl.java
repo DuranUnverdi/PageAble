@@ -1,12 +1,15 @@
 package com.duranunverdi.service.impl;
 
 import com.duranunverdi.dto.DtoPersonel;
+import com.duranunverdi.model.Personel;
 import com.duranunverdi.repository.IPersonelRepository;
 import com.duranunverdi.service.IPersonelService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -30,5 +33,7 @@ public class PersonelServiceImpl implements IPersonelService {
                         p.getDepartment().getName()
                 ));
     }
+
+
 
 }

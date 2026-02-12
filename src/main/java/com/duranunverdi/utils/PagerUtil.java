@@ -1,9 +1,12 @@
 package com.duranunverdi.utils;
 
 import lombok.experimental.UtilityClass;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 @UtilityClass
 public class PagerUtil {
@@ -16,5 +19,14 @@ public class PagerUtil {
           return PageRequest.of(restPageableRequest.getPageNumber(), restPageableRequest.getPageSize(), sortBy);
        }
        return PageRequest.of(restPageableRequest.getPageNumber(), restPageableRequest.getPageSize());
+    }
+    public static <T> RestPageableEntity<T> toPageableResponse(Page<?> page, List<T> content) {
+
+        return new RestPageableEntity<>(
+                content,
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements()
+        );
     }
 }
