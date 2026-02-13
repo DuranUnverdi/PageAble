@@ -33,6 +33,9 @@ public class RestPageableRequest {
     public boolean isAsc() {
         return asc;
     }
+    public boolean getAsc() {
+        return asc;
+    }
     public void setAsc(boolean asc) {
         this.asc = asc;
     }

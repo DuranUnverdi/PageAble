@@ -22,18 +22,24 @@ public class PersonelServiceImpl implements IPersonelService {
         this.repository = repository;
     }
 
+
     @Override
     public Page<DtoPersonel> findAll(Pageable pageable) {
-        return repository.findAll(pageable)
-                .map(p -> new DtoPersonel(
-                        p.getId(),
-                        p.getFirstName(),
-                        p.getLastName(),
-                        p.getDepartment().getId(),
-                        p.getDepartment().getName()
-                ));
-    }
 
+        Page<Personel> page = repository.findBy(pageable);
+
+        return page.map(personel -> new DtoPersonel(
+                personel.getId(),
+                personel.getFirstName(),
+                personel.getLastName(),
+                personel.getDepartment() != null
+                        ? personel.getDepartment().getId()
+                        : null,
+                personel.getDepartment() != null
+                        ? personel.getDepartment().getName()
+                        : null
+        ));
+    }
 
 
 }

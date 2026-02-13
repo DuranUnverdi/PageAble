@@ -3,6 +3,7 @@ package com.duranunverdi.controller.impl;
 import com.duranunverdi.utils.PagerUtil;
 import com.duranunverdi.utils.RestPageableEntity;
 import com.duranunverdi.utils.RestPageableRequest;
+import com.duranunverdi.utils.RootEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,5 +19,9 @@ public class RestBaseController {
 
         return PagerUtil.toPageableResponse(page, list);
 
+    }
+    public <T> RootEntity<T> toRootEntity(T payload) {
+
+        return  RootEntity.success(payload);
     }
 }
